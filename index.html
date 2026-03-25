@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IT Mock Examination</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='26' font-size='28'>🎓</text></svg>">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,400;0,500;1,400&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<canvas id="particles"></canvas>
+
+<!-- ░░░ SCREEN: LANDING ░░░ -->
+<div id="screen-landing" class="screen active">
+  <div class="landing-grid">
+    <div class="landing-badge">
+      <span class="badge-dot"></span>
+      LIVE EXAMINATION PORTAL
+    </div>
+    <h1 class="landing-title">
+      <span class="title-line">Information</span>
+      <span class="title-line accent-line">Technology</span>
+      <span class="title-line">Mock Exam</span>
+    </h1>
+    <p class="landing-sub">Classes 1–10 &nbsp;·&nbsp; Hardware &nbsp;·&nbsp; MS Word &nbsp;·&nbsp; MS Excel</p>
+
+    <div class="info-cards">
+      <div class="info-card" style="--d:0"><div class="ic-icon">📋</div><div class="ic-val">30</div><div class="ic-lbl">MCQ Questions</div></div>
+      <div class="info-card" style="--d:1"><div class="ic-icon">📝</div><div class="ic-val">35</div><div class="ic-lbl">Word Marks</div></div>
+      <div class="info-card" style="--d:2"><div class="ic-icon">📊</div><div class="ic-val">35</div><div class="ic-lbl">Excel Marks</div></div>
+      <div class="info-card" style="--d:3"><div class="ic-icon">🏆</div><div class="ic-val">100</div><div class="ic-lbl">Total Marks</div></div>
+    </div>
+
+    <div class="name-entry-box">
+      <label class="ne-label">Enter Your Full Name to Begin</label>
+      <div class="ne-row">
+        <input id="student-name" class="ne-input" type="text" placeholder="e.g. Zain" autocomplete="off" />
+        <button id="btn-start" class="btn-primary" onclick="startExam()">
+          <span>Start Exam</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+      <p class="ne-hint">Only registered students can access this exam. One attempt per student.</p>
+    </div>
+
+    <button class="teacher-link-btn" onclick="showScreen('screen-teacher')">🔐 Teacher Panel</button>
+
+    <div class="landing-footer">Made with ♥ by <strong>JiniMaestro</strong></div>
+  </div>
+</div>
+
+<!-- ░░░ SCREEN: MCQ ░░░ -->
+<div id="screen-mcq" class="screen">
+  <header class="exam-header">
+    <div class="eh-left">
+      <div class="eh-logo">JM</div>
+      <div>
+        <div class="eh-title">Section A — MCQs</div>
+        <div id="eh-student" class="eh-student"></div>
+      </div>
+    </div>
+    <div class="eh-right">
+      <div class="progress-ring-wrap">
+        <svg class="progress-ring" viewBox="0 0 56 56">
+          <circle cx="28" cy="28" r="24" class="ring-bg"/>
+          <circle cx="28" cy="28" r="24" class="ring-fg" id="ring-circle"/>
+        </svg>
+        <div class="ring-text" id="ring-text">0/30</div>
+      </div>
+      <div class="timer-box">
+        <div class="timer-icon">⏱</div>
+        <div id="timer-display" class="timer-val">45:00</div>
+      </div>
+    </div>
+  </header>
+  <div class="mcq-stage">
+    <div class="mcq-progress-bar"><div id="mcq-bar" class="mcq-bar-fill"></div></div>
+    <div id="mcq-card" class="mcq-card">
+      <div class="mcq-meta">
+        <span id="mcq-section-tag" class="mcq-section-tag"></span>
+        <span id="mcq-num" class="mcq-num"></span>
+      </div>
+      <h2 id="mcq-question" class="mcq-question"></h2>
+      <div id="mcq-options" class="mcq-options"></div>
+      <div class="mcq-nav">
+        <button id="btn-prev" class="btn-ghost" onclick="prevQ()">← Previous</button>
+        <div id="mcq-dots" class="mcq-dots"></div>
+        <button id="btn-next" class="btn-next" onclick="nextQ()">Next →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ░░░ SCREEN: PRACTICAL ░░░ -->
+<div id="screen-practical" class="screen">
+  <header class="exam-header">
+    <div class="eh-left">
+      <div class="eh-logo">JM</div>
+      <div>
+        <div class="eh-title">Practical Section</div>
+        <div id="prac-student" class="eh-student"></div>
+      </div>
+    </div>
+    <div class="eh-right">
+      <div class="score-pill">MCQ Score: <strong id="mcq-score-display">—</strong>/30</div>
+    </div>
+  </header>
+  <div class="prac-stage">
+    <div class="prac-tabs">
+      <button class="ptab active" data-tab="word" onclick="switchTab('word')">
+        <span class="ptab-icon">📝</span> Word Tasks <span class="ptab-marks">35 Marks</span>
+      </button>
+      <button class="ptab" data-tab="excel" onclick="switchTab('excel')">
+        <span class="ptab-icon">📊</span> Excel Tasks <span class="ptab-marks">35 Marks</span>
+      </button>
+    </div>
+
+    <!-- WORD TAB -->
+    <div id="tab-word" class="prac-tab-content active">
+      <div class="prac-context-box">
+        <div class="pcb-icon">📄</div>
+        <div>
+          <strong>Document Topic:</strong> Create a Word document titled <em>"Computer Hardware — An Introduction"</em> covering at least 4 hardware topics (Processor, RAM, Storage, Motherboard). Write at least 2 paragraphs per topic. Then apply ALL tasks below.
+          <br/><br/>
+          <strong>Save As:</strong> <code>Word_Final_[YourName].docx</code>
+        </div>
+      </div>
+      <div class="task-list" id="word-tasks"></div>
+      <div class="upload-zone" id="word-upload-zone">
+        <div class="uz-inner" onclick="document.getElementById('word-file').click()">
+          <div class="uz-icon">📁</div>
+          <div class="uz-title">Upload Your Word File</div>
+          <div class="uz-sub">Click to browse or drag & drop your .docx file here</div>
+          <div class="uz-badge">Word_Final_[YourName].docx</div>
+        </div>
+        <input type="file" id="word-file" accept=".docx,.doc" style="display:none" onchange="handleFileUpload('word', this)" />
+        <div id="word-file-status" class="file-status"></div>
+      </div>
+    </div>
+
+    <!-- EXCEL TAB -->
+    <div id="tab-excel" class="prac-tab-content">
+      <div class="prac-context-box excel-ctx">
+        <div class="pcb-icon">📊</div>
+        <div>
+          <strong>Enter this student data on Sheet 1 of your Excel file, then complete all tasks below.</strong>
+          <br/><strong>Save As:</strong> <code>Excel_Final_[YourName].xlsx</code>
+        </div>
+      </div>
+      <div class="excel-data-table-wrap">
+        <table class="excel-preview-table">
+          <thead><tr><th>Name</th><th>Math</th><th>English</th><th>Science</th><th>IT</th><th>Total</th><th>Average</th><th>Grade</th></tr></thead>
+          <tbody>
+            <tr><td>Ali Ahmed</td><td>78</td><td>85</td><td>72</td><td>90</td><td class="formula-cell">(formula)</td><td class="formula-cell">(formula)</td><td class="formula-cell">(formula)</td></tr>
+            <tr><td>Sara Khan</td><td>92</td><td>76</td><td>88</td><td>95</td><td class="formula-cell">(formula)</td><td class="formula-cell">(formula)</td><td class="formula-cell">(formula)</td></tr>
+            <tr><td>Bilal Raza</td><td>65</td><td>70</td><td>80</td><td>75</td><td class="formula-cell">(formula)</td><td class="formula-cell">(formula)</td><td class="formula-cell">(formula)</td></tr>
+            <tr><td>Hira Malik</td><td>88</td><td>91</td><td>94</td><td>87</td><td class="formula-cell">(formula)</td><td class="formula-cell">(formula)</td><td class="formula-cell">(formula)</td></tr>
+            <tr><td>Usman Tariq</td><td>55</td><td>60</td><td>58</td><td>62</td><td class="formula-cell">(formula)</td><td class="formula-cell">(formula)</td><td class="formula-cell">(formula)</td></tr>
+            <tr><td>Zara Noor</td><td>79</td><td>83</td><td>77</td><td>81</td><td class="formula-cell">(formula)</td><td class="formula-cell">(formula)</td><td class="formula-cell">(formula)</td></tr>
+            <tr><td>Kamran Baig</td><td>95</td><td>89</td><td>91</td><td>98</td><td class="formula-cell">(formula)</td><td class="formula-cell">(formula)</td><td class="formula-cell">(formula)</td></tr>
+            <tr><td>Ayesha Siddiqi</td><td>60</td><td>72</td><td>65</td><td>70</td><td class="formula-cell">(formula)</td><td class="formula-cell">(formula)</td><td class="formula-cell">(formula)</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="task-list" id="excel-tasks"></div>
+      <div class="upload-zone excel-uz" id="excel-upload-zone">
+        <div class="uz-inner" onclick="document.getElementById('excel-file').click()">
+          <div class="uz-icon">📂</div>
+          <div class="uz-title">Upload Your Excel File</div>
+          <div class="uz-sub">Click to browse or drag & drop your .xlsx file here</div>
+          <div class="uz-badge">Excel_Final_[YourName].xlsx</div>
+        </div>
+        <input type="file" id="excel-file" accept=".xlsx,.xls,.csv" style="display:none" onchange="handleFileUpload('excel', this)" />
+        <div id="excel-file-status" class="file-status"></div>
+      </div>
+    </div>
+
+    <div class="prac-submit-row">
+      <button class="btn-submit" onclick="submitExam()">
+        <span>Submit & Send to Teacher</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ░░░ SCREEN: RESULT (student — no download) ░░░ -->
+<div id="screen-result" class="screen">
+  <div class="result-stage">
+    <div class="result-confetti" id="confetti-area"></div>
+    <div class="result-card" id="result-card">
+      <div class="rc-header">
+        <div class="rc-logo">JM</div>
+        <div class="rc-title">Exam Submitted!</div>
+        <div class="rc-subtitle">Your answers have been sent to your teacher for grading.</div>
+      </div>
+      <div class="rc-student-name" id="rc-name"></div>
+      <div class="rc-scores">
+        <div class="rcs-item" style="--c:#4CAF50">
+          <div class="rcs-label">Section A — MCQs (Auto-Graded)</div>
+          <div class="rcs-score"><span id="r-mcq">0</span><small>/30</small></div>
+          <div class="rcs-bar"><div class="rcs-fill" id="rb-mcq"></div></div>
+        </div>
+        <div class="rcs-item" style="--c:#2196F3">
+          <div class="rcs-label">Section B — Word (Submitted to Teacher)</div>
+          <div class="rcs-score"><span id="r-word">—</span></div>
+          <div class="rcs-bar"><div class="rcs-fill" id="rb-word" style="width:0%"></div></div>
+        </div>
+        <div class="rcs-item" style="--c:#FF9800">
+          <div class="rcs-label">Section C — Excel (Submitted to Teacher)</div>
+          <div class="rcs-score"><span id="r-excel">—</span></div>
+          <div class="rcs-bar"><div class="rcs-fill" id="rb-excel" style="width:0%"></div></div>
+        </div>
+      </div>
+      <div class="rc-total-box">
+        <div class="rtb-label">Your MCQ Score (Auto-Graded)</div>
+        <div class="rtb-score" id="rc-total-display">0 / 30</div>
+        <div class="rtb-note">Your Word & Excel sections will be graded by your teacher. You cannot retake this exam.</div>
+      </div>
+      <div class="rc-answers-section">
+        <h3 class="rca-title">MCQ Answers Review</h3>
+        <div id="rc-answers-grid" class="rca-grid"></div>
+      </div>
+      <div class="rc-footer">Made with ♥ by <strong>JiniMaestro</strong> &nbsp;·&nbsp; IT Mock Examination Portal</div>
+    </div>
+  </div>
+</div>
+
+<!-- ░░░ SCREEN: TEACHER PANEL ░░░ -->
+<div id="screen-teacher" class="screen">
+  <div class="teacher-wrap">
+
+    <!-- LOGIN PANEL -->
+    <div id="teacher-login-panel" style="display:flex; align-items:center; justify-content:center; min-height:100vh;">
+      <div class="t-login-card">
+        <div class="t-login-header">
+          <div class="t-login-logo">JM</div>
+          <div class="t-login-title">Teacher Portal</div>
+          <div class="t-login-sub">JiniMaestro IT Exam System</div>
+        </div>
+        <div class="t-login-form">
+          <div class="t-field">
+            <label>Email Address</label>
+            <input id="t-email" type="email" class="t-inp" placeholder="teacher@email.com" autocomplete="off"/>
+          </div>
+          <div class="t-field">
+            <label>Password</label>
+            <input id="t-pass" type="password" class="t-inp" placeholder="••••••••"/>
+          </div>
+          <div id="t-login-err" class="t-err"></div>
+          <button class="btn-t-login" onclick="teacherLogin()">Login to Teacher Panel →</button>
+          <button class="btn-back-student" onclick="showScreen('screen-landing')">← Back to Student Portal</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- DASHBOARD -->
+    <div id="teacher-dashboard" style="display:none;">
+
+      <!-- Teacher Header -->
+      <header class="teacher-header">
+        <div class="th-left">
+          <div class="eh-logo">JM</div>
+          <div>
+            <div class="eh-title">Teacher Dashboard</div>
+            <div class="eh-student">JiniMaestro IT Exam Portal</div>
+          </div>
+        </div>
+        <div class="th-right">
+          <button class="btn-clear-data" onclick="clearAllData()">🗑 Clear All Data</button>
+          <button class="btn-t-logout" onclick="teacherLogout()">Logout ↩</button>
+        </div>
+      </header>
+
+      <div class="teacher-body">
+
+        <!-- SECTION: Student Manager -->
+        <section class="t-section">
+          <div class="t-section-title">
+            <span>👥 Student Access Manager</span>
+            <span class="t-section-sub">Control who can take the exam</span>
+          </div>
+          <div class="add-student-row">
+            <input id="new-student-name" class="t-inp t-inp-sm" type="text" placeholder="Student name (e.g. Ahmed)" autocomplete="off"
+              onkeydown="if(event.key==='Enter') addStudent()"/>
+            <button class="btn-add-student" onclick="addStudent()">+ Add Student</button>
+          </div>
+          <div id="student-list" class="student-list-container"></div>
+        </section>
+
+        <!-- SECTION: Submissions -->
+        <section class="t-section">
+          <div class="t-section-title">
+            <span>📥 Exam Submissions</span>
+            <span class="t-section-sub">Review, download files, and grade each student</span>
+          </div>
+          <div id="no-submissions" class="no-subs-msg" style="display:none;">
+            No submissions yet. Students' results will appear here after they complete the exam.
+          </div>
+          <div id="submissions-list" class="submissions-container"></div>
+        </section>
+
+      </div><!-- /.teacher-body -->
+    </div><!-- /#teacher-dashboard -->
+  </div><!-- /.teacher-wrap -->
+</div><!-- /#screen-teacher -->
+
+<script src="questions.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
