@@ -130,7 +130,6 @@ const QUESTIONS = [
     ans: 1
   },
 
-  // ── MS WORD (Q21–Q25) ──────────────────────────
   {
     id: 21, section: "MS Word",
     q: "Which Ribbon tab is used to insert a Header or Footer in Microsoft Word?",
@@ -167,7 +166,6 @@ const QUESTIONS = [
     ans: 1
   },
 
-  // ── MS EXCEL (Q26–Q30) ─────────────────────────
   {
     id: 26, section: "MS Excel",
     q: "Which Excel feature automatically changes cell color or format based on rules you set?",
@@ -220,7 +218,6 @@ const QUESTIONS = [
   }
 ];
 
-// ── PRACTICAL TASKS ────────────────────────────────────────────────────────
 
 const WORD_TASKS = [
   { num: 1,  marks: 2, desc: "Apply <strong>Heading 1</strong> style to the main document title and <strong>Heading 2</strong> to each hardware topic sub-section (at least 4 sub-headings). Use the Styles group on the Home tab." },
