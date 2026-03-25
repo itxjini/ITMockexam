@@ -14,7 +14,6 @@
 
 <canvas id="particles"></canvas>
 
-<!-- ░░░ SCREEN: LANDING ░░░ -->
 <div id="screen-landing" class="screen active">
   <div class="landing-grid">
     <div class="landing-badge">
@@ -53,7 +52,6 @@
   </div>
 </div>
 
-<!-- ░░░ SCREEN: MCQ ░░░ -->
 <div id="screen-mcq" class="screen">
   <header class="exam-header">
     <div class="eh-left">
@@ -95,7 +93,6 @@
   </div>
 </div>
 
-<!-- ░░░ SCREEN: PRACTICAL ░░░ -->
 <div id="screen-practical" class="screen">
   <header class="exam-header">
     <div class="eh-left">
@@ -119,7 +116,6 @@
       </button>
     </div>
 
-    <!-- WORD TAB -->
     <div id="tab-word" class="prac-tab-content active">
       <div class="prac-context-box">
         <div class="pcb-icon">📄</div>
@@ -142,7 +138,6 @@
       </div>
     </div>
 
-    <!-- EXCEL TAB -->
     <div id="tab-excel" class="prac-tab-content">
       <div class="prac-context-box excel-ctx">
         <div class="pcb-icon">📊</div>
@@ -188,7 +183,6 @@
   </div>
 </div>
 
-<!-- ░░░ SCREEN: RESULT (student — no download) ░░░ -->
 <div id="screen-result" class="screen">
   <div class="result-stage">
     <div class="result-confetti" id="confetti-area"></div>
@@ -230,11 +224,9 @@
   </div>
 </div>
 
-<!-- ░░░ SCREEN: TEACHER PANEL ░░░ -->
 <div id="screen-teacher" class="screen">
   <div class="teacher-wrap">
 
-    <!-- LOGIN PANEL -->
     <div id="teacher-login-panel" style="display:flex; align-items:center; justify-content:center; min-height:100vh;">
       <div class="t-login-card">
         <div class="t-login-header">
@@ -257,11 +249,9 @@
         </div>
       </div>
     </div>
-
-    <!-- DASHBOARD -->
+    
     <div id="teacher-dashboard" style="display:none;">
 
-      <!-- Teacher Header -->
       <header class="teacher-header">
         <div class="th-left">
           <div class="eh-logo">JM</div>
@@ -278,7 +268,6 @@
 
       <div class="teacher-body">
 
-        <!-- SECTION: Student Manager -->
         <section class="t-section">
           <div class="t-section-title">
             <span>👥 Student Access Manager</span>
@@ -292,7 +281,6 @@
           <div id="student-list" class="student-list-container"></div>
         </section>
 
-        <!-- SECTION: Submissions -->
         <section class="t-section">
           <div class="t-section-title">
             <span>📥 Exam Submissions</span>
@@ -304,10 +292,10 @@
           <div id="submissions-list" class="submissions-container"></div>
         </section>
 
-      </div><!-- /.teacher-body -->
-    </div><!-- /#teacher-dashboard -->
-  </div><!-- /.teacher-wrap -->
-</div><!-- /#screen-teacher -->
+      </div>
+    </div>
+  </div>
+</div>
 
 <script src="questions.js"></script>
 <script src="app.js"></script>
