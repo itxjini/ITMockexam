@@ -16,10 +16,7 @@
 
 <div id="screen-landing" class="screen active">
   <div class="landing-grid">
-    <div class="landing-badge">
-      <span class="badge-dot"></span>
-      LIVE EXAMINATION PORTAL
-    </div>
+    <div class="landing-badge"><span class="badge-dot"></span>LIVE EXAMINATION PORTAL</div>
     <h1 class="landing-title">
       <span class="title-line">Information</span>
       <span class="title-line accent-line">Technology</span>
@@ -37,18 +34,21 @@
     <div class="name-entry-box">
       <label class="ne-label">Enter Your Full Name to Begin</label>
       <div class="ne-row">
-        <input id="student-name" class="ne-input" type="text" placeholder="e.g. Zain" autocomplete="off" />
+        <input id="student-name" class="ne-input" type="text" placeholder="Enter your name" autocomplete="off" />
         <button id="btn-start" class="btn-primary" onclick="startExam()">
           <span>Start Exam</span>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </button>
       </div>
-      <p class="ne-hint">Only registered students can access this exam. One attempt per student.</p>
+      <div id="name-error" class="name-error" style="display:none;"></div>
+      <p class="ne-hint">Only registered students may access this exam.</p>
     </div>
 
-    <button class="teacher-link-btn" onclick="showScreen('screen-teacher')">🔐 Teacher Panel</button>
-
-    <div class="landing-footer">Made with ♥ by <strong>JiniMaestro</strong></div>
+    <div class="landing-footer">
+      Made with ♥ by <strong>JiniMaestro</strong>
+      &nbsp;·&nbsp;
+      <a href="teacher.html" class="teacher-link">🔐 Teacher Panel</a>
+    </div>
   </div>
 </div>
 
@@ -121,8 +121,7 @@
         <div class="pcb-icon">📄</div>
         <div>
           <strong>Document Topic:</strong> Create a Word document titled <em>"Computer Hardware — An Introduction"</em> covering at least 4 hardware topics (Processor, RAM, Storage, Motherboard). Write at least 2 paragraphs per topic. Then apply ALL tasks below.
-          <br/><br/>
-          <strong>Save As:</strong> <code>Word_Final_[YourName].docx</code>
+          <br/><br/><strong>Save As:</strong> <code>Word_Final_[YourName].docx</code>
         </div>
       </div>
       <div class="task-list" id="word-tasks"></div>
@@ -177,122 +176,26 @@
     <div class="prac-submit-row">
       <button class="btn-submit" onclick="submitExam()">
         <span>Submit & Send to Teacher</span>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
       </button>
     </div>
   </div>
 </div>
 
-<div id="screen-result" class="screen">
-  <div class="result-stage">
-    <div class="result-confetti" id="confetti-area"></div>
-    <div class="result-card" id="result-card">
-      <div class="rc-header">
-        <div class="rc-logo">JM</div>
-        <div class="rc-title">Exam Submitted!</div>
-        <div class="rc-subtitle">Your answers have been sent to your teacher for grading.</div>
+<div id="screen-submitted" class="screen">
+  <div class="submitted-wrap">
+    <div class="submitted-card">
+      <div class="sc-check">✅</div>
+      <h2 class="sc-title">Exam Submitted!</h2>
+      <p class="sc-msg">Your answers and files have been sent to your teacher for marking. You will be informed of your final results shortly.</p>
+      <div class="sc-student" id="sc-student-name"></div>
+      <div class="sc-rows">
+        <div class="sc-row"><span class="scr-label">MCQ Score (Auto-Graded)</span><span class="scr-val green" id="sc-mcq">—</span></div>
+        <div class="sc-row"><span class="scr-label">Word File</span><span class="scr-val" id="sc-word">—</span></div>
+        <div class="sc-row"><span class="scr-label">Excel File</span><span class="scr-val" id="sc-excel">—</span></div>
       </div>
-      <div class="rc-student-name" id="rc-name"></div>
-      <div class="rc-scores">
-        <div class="rcs-item" style="--c:#4CAF50">
-          <div class="rcs-label">Section A — MCQs (Auto-Graded)</div>
-          <div class="rcs-score"><span id="r-mcq">0</span><small>/30</small></div>
-          <div class="rcs-bar"><div class="rcs-fill" id="rb-mcq"></div></div>
-        </div>
-        <div class="rcs-item" style="--c:#2196F3">
-          <div class="rcs-label">Section B — Word (Submitted to Teacher)</div>
-          <div class="rcs-score"><span id="r-word">—</span></div>
-          <div class="rcs-bar"><div class="rcs-fill" id="rb-word" style="width:0%"></div></div>
-        </div>
-        <div class="rcs-item" style="--c:#FF9800">
-          <div class="rcs-label">Section C — Excel (Submitted to Teacher)</div>
-          <div class="rcs-score"><span id="r-excel">—</span></div>
-          <div class="rcs-bar"><div class="rcs-fill" id="rb-excel" style="width:0%"></div></div>
-        </div>
-      </div>
-      <div class="rc-total-box">
-        <div class="rtb-label">Your MCQ Score (Auto-Graded)</div>
-        <div class="rtb-score" id="rc-total-display">0 / 30</div>
-        <div class="rtb-note">Your Word & Excel sections will be graded by your teacher. You cannot retake this exam.</div>
-      </div>
-      <div class="rc-answers-section">
-        <h3 class="rca-title">MCQ Answers Review</h3>
-        <div id="rc-answers-grid" class="rca-grid"></div>
-      </div>
-      <div class="rc-footer">Made with ♥ by <strong>JiniMaestro</strong> &nbsp;·&nbsp; IT Mock Examination Portal</div>
-    </div>
-  </div>
-</div>
-
-<div id="screen-teacher" class="screen">
-  <div class="teacher-wrap">
-
-    <div id="teacher-login-panel" style="display:flex; align-items:center; justify-content:center; min-height:100vh;">
-      <div class="t-login-card">
-        <div class="t-login-header">
-          <div class="t-login-logo">JM</div>
-          <div class="t-login-title">Teacher Portal</div>
-          <div class="t-login-sub">JiniMaestro IT Exam System</div>
-        </div>
-        <div class="t-login-form">
-          <div class="t-field">
-            <label>Email Address</label>
-            <input id="t-email" type="email" class="t-inp" placeholder="teacher@email.com" autocomplete="off"/>
-          </div>
-          <div class="t-field">
-            <label>Password</label>
-            <input id="t-pass" type="password" class="t-inp" placeholder="••••••••"/>
-          </div>
-          <div id="t-login-err" class="t-err"></div>
-          <button class="btn-t-login" onclick="teacherLogin()">Login to Teacher Panel →</button>
-          <button class="btn-back-student" onclick="showScreen('screen-landing')">← Back to Student Portal</button>
-        </div>
-      </div>
-    </div>
-    
-    <div id="teacher-dashboard" style="display:none;">
-
-      <header class="teacher-header">
-        <div class="th-left">
-          <div class="eh-logo">JM</div>
-          <div>
-            <div class="eh-title">Teacher Dashboard</div>
-            <div class="eh-student">JiniMaestro IT Exam Portal</div>
-          </div>
-        </div>
-        <div class="th-right">
-          <button class="btn-clear-data" onclick="clearAllData()">🗑 Clear All Data</button>
-          <button class="btn-t-logout" onclick="teacherLogout()">Logout ↩</button>
-        </div>
-      </header>
-
-      <div class="teacher-body">
-
-        <section class="t-section">
-          <div class="t-section-title">
-            <span>👥 Student Access Manager</span>
-            <span class="t-section-sub">Control who can take the exam</span>
-          </div>
-          <div class="add-student-row">
-            <input id="new-student-name" class="t-inp t-inp-sm" type="text" placeholder="Student name (e.g. Ahmed)" autocomplete="off"
-              onkeydown="if(event.key==='Enter') addStudent()"/>
-            <button class="btn-add-student" onclick="addStudent()">+ Add Student</button>
-          </div>
-          <div id="student-list" class="student-list-container"></div>
-        </section>
-
-        <section class="t-section">
-          <div class="t-section-title">
-            <span>📥 Exam Submissions</span>
-            <span class="t-section-sub">Review, download files, and grade each student</span>
-          </div>
-          <div id="no-submissions" class="no-subs-msg" style="display:none;">
-            No submissions yet. Students' results will appear here after they complete the exam.
-          </div>
-          <div id="submissions-list" class="submissions-container"></div>
-        </section>
-
-      </div>
+      <p class="sc-note">Results will be displayed in the Teacher Panel after grading.</p>
+      <div class="sc-footer">Made with ♥ by <strong>JiniMaestro</strong></div>
     </div>
   </div>
 </div>
