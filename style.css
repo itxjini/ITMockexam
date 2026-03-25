@@ -1,8 +1,3 @@
-/* ════════════════════════════════════════════════
-   IT FINAL EXAM — JiniMaestro
-   Style: Dark Tech / Glassmorphic / Animated
-   ════════════════════════════════════════════════ */
-
 :root {
   --bg:       #080c14;
   --surface:  #0e1623;
@@ -36,13 +31,12 @@ body {
   overflow-x: hidden;
 }
 
-/* ── PARTICLES ─────────────────────────── */
+
 #particles {
   position: fixed; inset: 0; z-index: 0;
   pointer-events: none;
 }
 
-/* ── SCREENS ───────────────────────────── */
 .screen {
   display: none;
   position: relative; z-index: 1;
@@ -50,7 +44,6 @@ body {
 }
 .screen.active { display: flex; }
 
-/* ══ LANDING ══════════════════════════════ */
 #screen-landing {
   align-items: center; justify-content: center;
   padding: 40px 20px;
@@ -121,7 +114,6 @@ body {
 .ic-val  { font-size: 28px; font-weight: 800; color: var(--cyan); }
 .ic-lbl  { font-size: 11px; color: var(--muted); font-family: var(--font-mono); text-align:center; }
 
-/* name entry */
 .name-entry-box {
   width: 100%;
   background: var(--glass);
@@ -165,7 +157,6 @@ body {
 .landing-footer { font-size: 12px; color: var(--muted); font-family: var(--font-mono); }
 .landing-footer strong { color: var(--accent); }
 
-/* ══ EXAM HEADER ══════════════════════════ */
 .exam-header {
   position: sticky; top: 0; z-index: 100;
   background: rgba(8,12,20,.85);
@@ -186,7 +177,6 @@ body {
 .eh-student { font-size: 12px; color: var(--cyan); font-family: var(--font-mono); }
 .eh-right   { display: flex; align-items: center; gap: 20px; }
 
-/* progress ring */
 .progress-ring-wrap { position: relative; width: 56px; height: 56px; }
 .progress-ring { width: 56px; height: 56px; transform: rotate(-90deg); }
 .ring-bg { fill: none; stroke: rgba(255,255,255,.08); stroke-width: 4; }
@@ -207,7 +197,6 @@ body {
 .timer-val.warn  { color: var(--orange); }
 .timer-val.danger{ color: var(--red); animation: blink .8s infinite; }
 
-/* ══ MCQ SCREEN ═══════════════════════════ */
 #screen-mcq { flex-direction: column; }
 .mcq-stage {
   flex: 1; display: flex; flex-direction: column; align-items: center;
@@ -342,7 +331,6 @@ body {
   box-shadow: 0 4px 16px rgba(34,197,94,.3);
 }
 
-/* ══ PRACTICAL SCREEN ═════════════════════ */
 #screen-practical { flex-direction: column; }
 .prac-stage {
   flex: 1; padding: 28px 24px 60px;
@@ -401,7 +389,6 @@ body {
   padding: 1px 6px; font-family: var(--font-mono); font-size: 13px; color: var(--cyan);
 }
 
-/* excel data preview table */
 .excel-data-table-wrap {
   overflow-x: auto; margin-bottom: 24px; border-radius: 12px;
   border: 1px solid var(--glass-border);
@@ -423,7 +410,6 @@ body {
 .excel-preview-table tr:nth-child(even) td { background: rgba(255,255,255,.025); }
 .formula-cell { color: var(--muted); font-style: italic; }
 
-/* task list */
 .task-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 28px; }
 
 .task-item {
@@ -454,7 +440,6 @@ body {
   border: 1px solid rgba(34,197,94,.2); border-radius: 99px; padding: 2px 8px;
 }
 
-/* upload zone */
 .upload-zone {
   border: 2px dashed rgba(59,139,255,.3);
   border-radius: 20px; padding: 8px;
@@ -507,7 +492,6 @@ body {
 .btn-submit:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(34,197,94,.5); }
 .btn-submit svg  { width: 20px; height: 20px; }
 
-/* ══ RESULT SCREEN ════════════════════════ */
 #screen-result { align-items: center; justify-content: center; padding: 40px 20px; }
 
 .result-stage { width: 100%; max-width: 700px; position: relative; }
@@ -576,7 +560,6 @@ body {
 }
 .rtb-note { font-size: 12px; color: var(--muted); margin-top: 8px; font-family: var(--font-mono); }
 
-/* answers review */
 .rc-answers-section { padding: 0 40px 24px; }
 .rca-title { font-size: 14px; font-family: var(--font-mono); color: var(--muted); margin-bottom: 14px; letter-spacing: 1px; }
 .rca-grid  { display: grid; grid-template-columns: repeat(auto-fill, minmax(68px,1fr)); gap: 8px; }
@@ -624,7 +607,6 @@ body {
 }
 .rc-footer strong { color: var(--accent); }
 
-/* ── CONFETTI PIECES ───────────────────── */
 .confetti-piece {
   position: fixed; width: 10px; height: 14px;
   top: -20px; border-radius: 2px;
@@ -632,7 +614,6 @@ body {
   pointer-events: none; z-index: 9999;
 }
 
-/* ── TRANSITIONS & ANIMATIONS ─────────── */
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(20px); }
   to   { opacity: 1; transform: translateY(0); }
@@ -663,11 +644,9 @@ body {
 @keyframes screenExit { to { opacity: 0; transform: scale(.96); } }
 @keyframes screenEnter { from { opacity: 0; transform: scale(1.02); } }
 
-/* drag-over state */
 .upload-zone.drag-over { border-color: var(--blue); background: rgba(59,139,255,.07); }
 .excel-uz.drag-over    { border-color: var(--orange); background: rgba(249,115,22,.07); }
 
-/* ── RESPONSIVE ────────────────────────── */
 @media (max-width: 600px) {
   .info-cards { grid-template-columns: repeat(2,1fr); }
   .ne-row { flex-direction: column; }
@@ -678,11 +657,6 @@ body {
   .rc-total-box { margin-left: 20px; margin-right: 20px; }
 }
 
-/* ══════════════════════════════════════════════════
-   TEACHER PANEL STYLES
-   ══════════════════════════════════════════════════ */
-
-/* ── Teacher link on landing ─────────────────────── */
 .teacher-link-btn {
   background: transparent;
   border: 1px solid rgba(167,139,250,.3);
@@ -700,10 +674,8 @@ body {
   border-color: var(--accent);
 }
 
-/* ── Teacher screen wrapper ──────────────────────── */
 .teacher-wrap { width: 100%; min-height: 100vh; }
 
-/* ── Teacher Login Card ──────────────────────────── */
 .t-login-card {
   background: var(--surface);
   border: 1px solid var(--glass-border);
@@ -767,7 +739,6 @@ body {
 }
 .btn-back-student:hover { border-color: var(--blue); color: var(--text); }
 
-/* ── Teacher Header ──────────────────────────────── */
 .teacher-header {
   position: sticky; top: 0; z-index: 100;
   background: rgba(8,12,20,.9);
@@ -797,7 +768,6 @@ body {
 }
 .btn-clear-data:hover { border-color: var(--red); color: var(--red); }
 
-/* ── Teacher Body ────────────────────────────────── */
 .teacher-body {
   max-width: 1100px; margin: 0 auto;
   padding: 32px 24px 80px;
@@ -818,7 +788,6 @@ body {
 }
 .t-section-sub { font-size: 12px; color: var(--muted); font-family: var(--font-mono); font-weight: 400; }
 
-/* ── Add Student Row ─────────────────────────────── */
 .add-student-row {
   display: flex; gap: 12px; padding: 20px 24px;
   border-bottom: 1px solid var(--glass-border);
@@ -832,7 +801,6 @@ body {
 }
 .btn-add-student:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(59,139,255,.45); }
 
-/* ── Student List ────────────────────────────────── */
 .student-list-container { padding: 12px 20px; display: flex; flex-direction: column; gap: 8px; }
 .no-students-msg { padding: 20px 24px; color: var(--muted); font-family: var(--font-mono); font-size: 13px; }
 
@@ -863,7 +831,6 @@ body {
 .btn-remove-s { background: rgba(239,68,68,.1); border-color: rgba(239,68,68,.3); color: var(--red); }
 .btn-remove-s:hover { background: rgba(239,68,68,.2); }
 
-/* ── Submissions ─────────────────────────────────── */
 .no-subs-msg {
   padding: 40px 28px; text-align: center;
   color: var(--muted); font-family: var(--font-mono); font-size: 14px; line-height: 1.7;
@@ -911,7 +878,6 @@ body {
   border: 1px solid rgba(249,115,22,.25); border-radius: 99px; padding: 4px 12px;
 }
 
-/* ── File download buttons ───────────────────────── */
 .sub-files-row { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 18px; }
 .btn-dl-file {
   display: inline-flex; align-items: center; gap: 8px;
@@ -929,7 +895,6 @@ body {
   background: rgba(255,255,255,.03); border-radius: 8px;
 }
 
-/* ── MCQ Dropdown Details ────────────────────────── */
 .mcq-details-drop {
   background: rgba(255,255,255,.02);
   border: 1px solid var(--glass-border);
@@ -961,7 +926,6 @@ body {
 .ans-correct { color: var(--green); font-weight: 700; }
 .ans-wrong   { color: var(--red);   font-weight: 700; }
 
-/* ── Grading Section ─────────────────────────────── */
 .grading-section {
   background: rgba(167,139,250,.05);
   border: 1px solid rgba(167,139,250,.2);
@@ -1023,7 +987,6 @@ body {
   border-radius: 99px; padding: 6px 14px;
 }
 
-/* ── Toast Notifications ─────────────────────────── */
 .jm-toast {
   position: fixed; bottom: 24px; right: 24px; z-index: 99999;
   padding: 13px 22px; border-radius: 12px;
@@ -1038,7 +1001,6 @@ body {
 .toast-warn    { background: #78350f; color: #fcd34d; border: 1px solid #d97706; }
 .toast-info    { background: #1e3a5f; color: #93c5fd; border: 1px solid #3b82f6; }
 
-/* ── Responsive Teacher ──────────────────────────── */
 @media (max-width: 700px) {
   .grading-grid { grid-template-columns: 1fr; }
   .sub-header   { flex-direction: column; align-items: flex-start; }
